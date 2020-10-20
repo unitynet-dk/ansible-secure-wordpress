@@ -21,16 +21,12 @@
     - wordpress-core-downloaded
 
 - name: core | configure
-  command: >
-    wp-cli core config
-    --allow-root --no-color --path='{{ item.path }}'
-    --dbname='{{ item.dbname }}'
-    --dbuser='{{ item.dbuser }}'
-    --dbpass='{{ item.dbpass }}'
-    --dbhost='{{ item.dbhost | default('localhost') }}'
-    --dbprefix='{{ item.dbprefix | default('wp_') }}'
-  args:
-    creates: "{{ item.path }}/wp-config.php"
+  template:
+    src: "{{ wordpress_wp_config_template }}"
+    dest: "{{ item.path }}/{{ wordpress_wp_config_filename }}"
+    owner: "{{ wordpress_apache_user }}"
+    group: "{{ wordpress_apache_group }}"
+    mode: 0644
   with_items: "{{ wordpress_installs }}"
   tags:
     - wordpress-core-configure

@@ -1,0 +1,7 @@
+---
+# RedHat vars file for unitynet-dk.secure-wordpress
+
+wordpress_apache_configuration: '/etc/httpd/conf.d/wordpress.conf'
+wordpress_configuration: '/etc/wordpress/wp-config.php'
+wordpress_apache_user: apache
+wordpress_apache_group: apache

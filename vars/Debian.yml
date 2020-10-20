@@ -1,0 +1,7 @@
+---
+# Debian vars file for unitynet-dk.secure-wordpress
+
+wordpress_apache_configuration: '/etc/apache2/conf.d/wordpress.conf'
+wordpress_configuration: '/etc/wordpress/wp-config.php'
+wordpress_apache_user: www-data
+wordpress_apache_group: www-data

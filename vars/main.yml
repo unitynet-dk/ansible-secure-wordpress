@@ -2,3 +2,6 @@
 ---
 wordpress_data_path: /var/lib/ansible/wordpress
 wordpress_disable_wp_cron_line: "define('DISABLE_WP_CRON', true);"
+wordpress_wp_config_filename: "wp-config.php"
+wordpress_wp_config_template: "wp-config.php.j2"
+wordpress_conf_template: "wordpress.conf.j2"
