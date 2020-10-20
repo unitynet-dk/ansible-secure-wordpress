@@ -25,8 +25,6 @@ This role assumes a working virtual host (that handles `wordpress_url`).
 * `wordpress_installs.{n}.dbprefix`: [default: `wp_`, optional]: Prefix for database tables
 * `wordpress_installs.{n}.path`: [required]: Install directory for wordpress
 * `wordpress_installs.{n}.locale`: [default: `en_US`, optional]: Language of the downloaded Wordpress
-* `wordpress_installs.{n}.owner`: [default: `www-data`]: The name of the user that should own the install
-* `wordpress_installs.{n}.group`: [default: `owner`, `www-data`]: The name of the group that should own the install
 * `wordpress_installs.{n}.url`: [required]: Wordpress url
 * `wordpress_installs.{n}.title`: [required]: Wordpress title
 * `wordpress_installs.{n}.admin_name`: [default: `admin`, optional]: Wordpress admin (user)name
@@ -65,6 +63,12 @@ This role assumes a working virtual host (that handles `wordpress_url`).
 * `wordpress_installs.{n}.options.{n}.autoload`: [default: `true`, optional]: Whether this option should be automatically loaded (only supported for add command)
 
 * `wordpress_installs.{n}.queries`: [default: `[]`, optional]: A list of queries to execute
+
+* `wordpress_installs.{n}.secure`: [required]: Security options
+* `wordpress_installs.{n}.secure.force_ssl`: [default: `false`, optional]: Force SSL on Admin pages
+* `wordpress_installs.{n}.secure.allow_file_mods`: [default: `true`, optional]: Allow installation of additional themes and plugins from the admin console
+* `wordpress_installs.{n}.secure.automatic_updates`: [default: `false`, optional]: Perform automatic updates
+* `wordpress_installs.{n}.secure.wp_debug`: [default: `false`, optional]: Enables debug messages
 
 ## Dependencies
 
@@ -147,15 +151,3 @@ None
             vakue: MXN
         queries: []
 ```
-
-#### License
-
-MIT
-
-#### Author Information
-
-Mischa ter Smitten
-
-#### Feedback, bug-reports, requests, ...
-
-Are [welcome](https://github.com/Oefenweb/ansible-wordpress/issues)!
