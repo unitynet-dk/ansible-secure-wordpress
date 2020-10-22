@@ -32,7 +32,7 @@ define('DB_CHARSET', 'utf8');
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
 
-{% if item.secure.force_ssl | default('false') %}
+{% if item.secure.force_ssl %}
 
 /**
  * Force SSL on Admin pages
@@ -75,6 +75,9 @@ define('DISALLOW_FILE_MODS', {{ not item.secure.allow_file_mods | default('false
 define('AUTOMATIC_UPDATER_DISABLED', {{ not item.secure.automatic_updates | default('false') }});
 
 /* Core update is always disabled, WP_AUTO_UPDATE_CORE value is ignore */
+
+/* Disallow file edit
+define('DISALLOW_FILE_EDIT', {{ not item.secure.disable_file_edit | default('false') }});
 
 /**
  * For developers: WordPress debugging mode.

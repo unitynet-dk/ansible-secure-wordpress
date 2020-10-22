@@ -1,0 +1,8 @@
+{% if item.secure.admin_allow_ip | default('') %}
+<Limit GET POST PUT>
+order deny,allow
+deny from all
+allow from {{ item.secure.admin_allow_ip }}
+</Limit>
+{% endif %}
+Options -Indexes

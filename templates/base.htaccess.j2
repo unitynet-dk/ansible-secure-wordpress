@@ -11,3 +11,45 @@ RewriteRule ^ - [L]
 RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
 RewriteRule ^(.*\.php)$ $1 [L]
 RewriteRule . index.php [L]
+{% if item.secure.force_ssl %}
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ {{ item.url }}/$1 [R,L]
+{% endif %}
+
+{% if item.secure.disable_xml_rpc | default('false', false) %}
+# Block WordPress xmlrpc.php requests
+<Files xmlrpc.php>
+order deny,allow
+deny from all
+#allow from 123.123.123.123
+</Files>
+{% endif %}
+
+# Deny access to wp-config.php file
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+
+# Block cross-site scripting
+{% if item.secure.disable_xss | default('false', false) %}
+<IfModule mod_rewrite.c>
+RewriteCond %{QUERY_STRING} (\|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule .* index.php [F,L]
+</IfModule>
+{% endif %}
+
+# Blocks all wp-includes folders and files
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^wp-admin/includes/ - [F,L]
+RewriteRule !^wp-includes/ - [S=3]
+RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+Options -Indexes

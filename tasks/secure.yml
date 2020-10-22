@@ -1,2 +1,52 @@
 # tasks file for wordpress, secure
 ---
+
+- name: secure | configure base htaccess
+  template:
+    src: "base.htaccess.j2"
+    dest: "{{ item.path }}/.htaccess"
+    owner: "{{ wordpress_apache_user }}"
+    group: "{{ wordpress_apache_group }}"
+    mode: 0644
+  with_items: "{{ wordpress_installs }}"
+  tags:
+    - wordpress-secure-configure-htaccess
+
+- name: secure | configure htaccess for /wp-content directory
+  template:
+    src: "wp-content.htaccess.j2"
+    dest: "{{ item.path }}/wp-content/.htaccess"
+    owner: "{{ wordpress_apache_user }}"
+    group: "{{ wordpress_apache_group }}"
+    mode: 0644
+  with_items: "{{ wordpress_installs }}"
+  tags:
+    - wordpress-secure-configure-htaccess
+
+- name: secure | configure htaccess for /wp-content/uploads directory
+  template:
+    src: "wp-content-uploads.htaccess.j2"
+    dest: "{{ item.path }}/wp-content/uploads/.htaccess"
+    owner: "{{ wordpress_apache_user }}"
+    group: "{{ wordpress_apache_group }}"
+    mode: 0644
+  with_items: "{{ wordpress_installs }}"
+  tags:
+    - wordpress-secure-configure-htaccess
+
+- name: secure | configure htaccess for /wp-admin directory
+  template:
+    src: "wp-admin.htaccess.j2"
+    dest: "{{ item.path }}/wp-admin/.htaccess"
+    owner: "{{ wordpress_apache_user }}"
+    group: "{{ wordpress_apache_group }}"
+    mode: 0644
+  with_items: "{{ wordpress_installs }}"
+  tags:
+    - wordpress-secure-configure-htaccess
+
+- name: secure | delete standard readme file
+  file:
+    path: "{{ item.path }}/readme.html"
+    state: absent
+  with_items: "{{ wordpress_installs }}"

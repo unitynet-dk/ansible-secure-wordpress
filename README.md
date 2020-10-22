@@ -65,16 +65,20 @@ This role assumes a working virtual host (that handles `wordpress_url`).
 * `wordpress_installs.{n}.queries`: [default: `[]`, optional]: A list of queries to execute
 
 * `wordpress_installs.{n}.secure`: [required]: Security options
-* `wordpress_installs.{n}.secure.force_ssl`: [default: `false`, optional]: Force SSL on Admin pages
+* `wordpress_installs.{n}.secure.force_ssl`: [default: `false`, required]: Force SSL
 * `wordpress_installs.{n}.secure.allow_file_mods`: [default: `true`, optional]: Allow installation of additional themes and plugins from the admin console
 * `wordpress_installs.{n}.secure.automatic_updates`: [default: `false`, optional]: Perform automatic updates
+* `wordpress_installs.{n}.secure.disable_file_edit`: [default: `false`, optional]: Disable file editing
+* `wordpress_installs.{n}.secure.disable_xml_rpc`: [default: `false`, optional]: Disable Wordpress XML-RPC
+* `wordpress_installs.{n}.secure.disable_xss`: [default: `false`, optional]: Disable cross-site scripting (XSS)
+* `wordpress_installs.{n}.secure.admin_allow_ip`: [optional]: Access to admin interface only by IP
 * `wordpress_installs.{n}.secure.wp_debug`: [default: `false`, optional]: Enables debug messages
 
 ## Dependencies
 
 None
 
-## Examples 
+## Examples
 
 ### Quickstart
 
@@ -139,7 +143,7 @@ None
             activate: false
           - name: simple-fields
         users: {}
-        options: 
+        options:
           - name: woocommerce_api_enabled
             command: update
             value: yes
