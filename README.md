@@ -147,11 +147,52 @@ None
           - name: woocommerce_api_enabled
             command: update
             value: yes
-          - name: swoocommerce_email_from_name
+          - name: woocommerce_email_from_name
             command: update
             vakue: payments@mycompany.com
           - name: woocommerce_currency
             command: update
-            vakue: MXN
+            vakue: EUR
+          - name: blogdescription
+            command: update
+            value: "Example WordPress Site"
         queries: []
+```
+
+### Secured installation:
+
+
+```yaml
+---
+- hosts: all
+  roles:
+  - wordpress
+  vars:
+    wordpress_installs:
+      - name: wordpress
+        dbname: wordpress
+        dbuser: wordpress
+        dbpass: 'heCrE7*d2KEs'
+        dbhost: localhost
+        dbprefix: wpex_
+        path: /var/www
+        url: http://localhost
+        title: wordpress
+        admin_name: admin
+        admin_email: root@localhost.localdomain
+        admin_password: 'tuFr8=aPra@a'
+        themes:
+          - name: twentytwelve
+            activate: true
+          - name: twentythirteen
+        plugins: []
+        users: {}
+        options: []
+        queries: []
+        secure:
+          force_ssl: true
+          disable_file_edit: true
+          admin_allow_ip: '192.168.0.0/16'
+          disable_xml_rpc: false
+          disable_xss: false
 ```
